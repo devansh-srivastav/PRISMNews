@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Dev/PRISMNews-main/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android_Dev/PRISMNews-main/app/src/main/res/layout/item_news.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/devan/AndroidStudioProjects/PRISMNews/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/devan/AndroidStudioProjects/PRISMNews/app/src/main/res/layout/item_news.xml" value="0.13020833333333334" />
       </map>
