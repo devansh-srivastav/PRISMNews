@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PRISM News</string>
+    <string name="news_pic">News pic</string>
 </resources>
