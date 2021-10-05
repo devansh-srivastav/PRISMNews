@@ -1,7 +1,6 @@
 package com.prism.prismnews
 
 import android.content.Intent
-import android.icu.text.CaseMap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -18,7 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class  MainActivity : AppCompatActivity(), NewsItemClicked {
+class SportsActivity : AppCompatActivity() , NewsItemClicked {
 
     private lateinit var mAdapter: NewsListAdapter
     lateinit var toggle: ActionBarDrawerToggle
@@ -26,7 +24,7 @@ class  MainActivity : AppCompatActivity(), NewsItemClicked {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sports)
         recyclerView.layoutManager = LinearLayoutManager(this)
         fetchData()
         mAdapter= NewsListAdapter(this)
@@ -67,18 +65,19 @@ class  MainActivity : AppCompatActivity(), NewsItemClicked {
             }
             true
 
+
         }
 
 
     }
 
 
-
     private fun fetchData() {
 
-        val url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=9edeb7c6b2574654828afb316dec47e0"
+        val url = "https://newsapi.org/v2/top-headlines?category=sports&country=in&apiKey=9edeb7c6b2574654828afb316dec47e0"
 
-        val jsonObjectRequest = object :JsonObjectRequest(Request.Method.GET, url, null,
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.GET, url, null,
 
             { response ->
                 val newsJsonArray = response.getJSONArray("articles")
