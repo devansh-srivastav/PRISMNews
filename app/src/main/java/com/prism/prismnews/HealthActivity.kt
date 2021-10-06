@@ -1,13 +1,19 @@
 package com.prism.prismnews
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
@@ -21,6 +27,7 @@ class HealthActivity : AppCompatActivity() , NewsItemClicked {
     private lateinit var mAdapter: NewsListAdapter
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
+    private val channelID = "Health"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +50,27 @@ class HealthActivity : AppCompatActivity() , NewsItemClicked {
             when(it.itemId){
                 R.id.nav_home -> {
                     Toast.makeText(applicationContext, "Clicked Home", Toast.LENGTH_SHORT).show()
+                    sendNotification("Home",1)
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 R.id.nav_business -> {
                     Toast.makeText(applicationContext, "Clicked Business", Toast.LENGTH_SHORT).show()
+                    sendNotification("Business",2)
                     startActivity(Intent(this, BusinessActivity::class.java))
                 }
                 R.id.nav_entertainment -> {
                     Toast.makeText(applicationContext, "Clicked Entertainment", Toast.LENGTH_SHORT).show()
+                    sendNotification("Entertainment",3)
                     startActivity(Intent(this, EntertainmentActivity::class.java))
                 }
                 R.id.nav_sports -> {
                     Toast.makeText(applicationContext, "Clicked Sports", Toast.LENGTH_SHORT).show()
+                    sendNotification("Sports",4)
                     startActivity(Intent(this, SportsActivity::class.java))
                 }
                 R.id.nav_health -> {
                     Toast.makeText(applicationContext, "Clicked Health", Toast.LENGTH_SHORT).show()
+                    sendNotification("Health",5)
                     startActivity(Intent(this, HealthActivity::class.java))
                 }
 
@@ -71,7 +83,33 @@ class HealthActivity : AppCompatActivity() , NewsItemClicked {
 
     }
 
+    private fun createNotificationChannel(){
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            val name = "PRISM News"
+            val descriptionText = "Navigated to Home"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelID, name, importance).apply{
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
 
+
+
+    }
+
+    private fun sendNotification(pageName: String, notificationID:Int){
+        val builder = NotificationCompat.Builder(this, channelID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("PRISM News")
+            .setContentText(pageName)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationID, builder.build())
+        }
+    }
     private fun fetchData() {
 
         val url = "https://newsapi.org/v2/top-headlines?category=health&country=in&apiKey=9edeb7c6b2574654828afb316dec47e0"
