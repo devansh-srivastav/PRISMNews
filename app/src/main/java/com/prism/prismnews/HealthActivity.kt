@@ -33,6 +33,7 @@ class HealthActivity : AppCompatActivity() , NewsItemClicked {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        setTitle("Health News")
         fetchData()
         mAdapter= NewsListAdapter(this)
         recyclerView.adapter = mAdapter
@@ -44,6 +45,7 @@ class HealthActivity : AppCompatActivity() , NewsItemClicked {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        createNotificationChannel()
 
         navigationView.setNavigationItemSelectedListener {
             it.isChecked=true

@@ -33,6 +33,7 @@ class BusinessActivity : AppCompatActivity(), NewsItemClicked {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        setTitle("Business News")
         fetchData()
         mAdapter= NewsListAdapter(this)
         recyclerView.adapter = mAdapter
@@ -44,6 +45,7 @@ class BusinessActivity : AppCompatActivity(), NewsItemClicked {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        createNotificationChannel()
 
         navigationView.setNavigationItemSelectedListener {
             it.isChecked=true

@@ -33,6 +33,7 @@ class SportsActivity : AppCompatActivity() , NewsItemClicked {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sports)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        setTitle("Sports News")
         fetchData()
         mAdapter= NewsListAdapter(this)
         recyclerView.adapter = mAdapter
@@ -44,6 +45,7 @@ class SportsActivity : AppCompatActivity() , NewsItemClicked {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        createNotificationChannel()
 
         navigationView.setNavigationItemSelectedListener {
             it.isChecked=true
